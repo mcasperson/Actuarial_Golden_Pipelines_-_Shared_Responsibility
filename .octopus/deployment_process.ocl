@@ -7,7 +7,7 @@ step "manual-intervention-required" {
         notes = "Added some notes"
         properties = {
             Octopus.Action.Manual.BlockConcurrentDeployments = "False"
-            Octopus.Action.Manual.Instructions = "Do you wish to proceed????"
+            Octopus.Action.Manual.Instructions = "Do you wish to proceed?"
             Octopus.Action.RunOnServer = "false"
         }
     }
