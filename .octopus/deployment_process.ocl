@@ -4,12 +4,12 @@ step "manual-intervention-required" {
     action {
         action_type = "Octopus.Manual"
         environments = ["production"]
-        notes = "This is an edit"
+        notes = "Notes"
         properties = {
             Octopus.Action.Manual.BlockConcurrentDeployments = "False"
             Octopus.Action.Manual.Instructions = "Do you approve this deployment?"
-            Octopus.Action.RunOnServer = "true"
         }
+        worker_pool = "hosted-ubuntu"
     }
 }
 
@@ -23,7 +23,7 @@ step "deploy-application" {
                 echo "Deploying application"
                 sleep 5
                 echo "Deployment done"
-                    EOT
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
@@ -70,21 +70,7 @@ step "success-report" {
             Octopus.Action.Email.Body = "The deployment of the app was successful"
             Octopus.Action.Email.Subject = "Deployment was successful!"
             Octopus.Action.Email.To = "report@example.org"
-            Octopus.Action.RunOnServer = "true"
         }
-    }
-}
-
-step "run-a-script" {
-    name = "Run a Script"
-
-    action {
-        action_type = "Octopus.Script"
-        properties = {
-            Octopus.Action.Script.ScriptBody = "a"
-            Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "PowerShell"
-        }
-        worker_pool = "hosted-windows"
+        worker_pool = "hosted-ubuntu"
     }
 }
